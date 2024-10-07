@@ -24,9 +24,11 @@ class VendorMachine {
             if (this.snacksQty > 0) {
                 this.snacksQty --
                 this.money += 2
+            } else {
+                throw new Error("La machine n'as plus de snacks :/")
             }
         } else {
-            throw new Error("La machine est malheureusement éteinte :/");
+            throw new Error("La machine est malheureusement éteinte :/")
         }
     }
 
@@ -39,20 +41,16 @@ class VendorMachine {
 
     public shootWithFoot(): void {
         // vérif quantité snacks
-        if (this.snacksQty <= 5 && this.snacksQty > 0) {
-            this.snacksQty -= this.snacksQty
-        } else if (this.snacksQty == 0) {
-            throw new Error("bien essayé, mais y'a plus de snacks");
+        if (this.snacksQty >= 1 ) {
+            this.snacksQty -= Math.floor(Math.random() * (this.snacksQty + 1))
         } else {
-            this.snacksQty -= 5
+            throw new Error("bien essayé, mais y'a plus de snacks");
         }
         // vérif quantité monnaie
-        if (this.money <= 20 && this.money > 0) {
-            this.money -= this.money
-        } else if (this.money == 0) {
-            throw new Error("bien essayé, mais y'a plus d'argent");
+        if (this.money >= 1) {
+            this.money -= Math.floor(Math.random() * (this.money + 1))
         } else {
-            this.money -= 20
+            throw new Error("bien essayé, mais y'a plus d'argent");
         }
         this.isOn = false
     }

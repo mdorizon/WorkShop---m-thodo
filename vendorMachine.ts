@@ -33,21 +33,23 @@ class VendorMachine {
     public reset(): void {
         this.isOn = false
         this.money = 0
-        this.snacksQty = 50
+        this.snacksQty += (50 - this.snacksQty)
         this.isOn = true
     }
 
     public shootWithFoot(): void {
-        if (this.snacksQty == 0) {
-            throw new Error("bien essayé, mais y'a plus de snacks");
-        }
-        this.snacksQty -= Math.floor(Math.random() * (this.snacksQty + 1))
-
-        if (this.money == 0) {
-            throw new Error("bien essayé, mais y'a plus d'argent");
-        }
-        this.money -= Math.floor(Math.random() * (this.money + 1))
         this.isOn = false
+
+        this.dropItem(20, this.snacksQty)
+        this.dropItem(5, this.money)
+    }
+
+    private dropItem(maxQty, item) {
+        let itemToDrop = maxQty
+        if (this.money < maxQty) {
+            itemToDrop = item
+        }
+        item -= itemToDrop
     }
 }
 

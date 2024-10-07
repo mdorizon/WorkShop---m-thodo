@@ -40,16 +40,24 @@ class VendorMachine {
     public shootWithFoot(): void {
         this.isOn = false
 
-        this.dropItem(20, this.snacksQty)
-        this.dropItem(5, this.money)
+        this.dropSnacks()
+        this.dropMoney()
     }
 
-    private dropItem(maxQty, item) {
-        let itemToDrop = maxQty
-        if (this.money < maxQty) {
-            itemToDrop = item
+    private dropMoney() {
+        let moneyToDrop = 20;
+        if (this.money < 20) {
+            moneyToDrop = this.money;
         }
-        item -= itemToDrop
+        this.money = this.money - moneyToDrop;
+    }
+    
+    private dropSnacks() {
+        let snackQtyToDrop = 5;
+        if (this.snacksQty < 5) {
+            snackQtyToDrop = this.snacksQty;
+        }
+        this.snacksQty = this.snacksQty - snackQtyToDrop;
     }
 }
 

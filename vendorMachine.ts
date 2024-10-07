@@ -23,6 +23,7 @@ class VendorMachine {
         this.isOn = false
         this.money = 0
         this.snacksQty = 50
+        this.isOn = true
     }
 
     public shootWithFoot() {

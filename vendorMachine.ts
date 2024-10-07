@@ -20,16 +20,14 @@ class VendorMachine {
     }
 
     public buySnack(): void {
-        if (this.isOn) {
-            if (this.snacksQty > 0) {
-                this.snacksQty --
-                this.money += 2
-            } else {
-                throw new Error("La machine n'as plus de snacks :/")
-            }
-        } else {
+        if (!this.isOn) {
             throw new Error("La machine est malheureusement éteinte :/")
         }
+        if (this.snacksQty == 0) {
+            throw new Error("La machine n'as plus de snacks :/")
+        }
+        this.snacksQty --
+        this.money += 2
     }
 
     public reset(): void {
@@ -40,18 +38,15 @@ class VendorMachine {
     }
 
     public shootWithFoot(): void {
-        // vérif quantité snacks
-        if (this.snacksQty >= 1 ) {
-            this.snacksQty -= Math.floor(Math.random() * (this.snacksQty + 1))
-        } else {
+        if (this.snacksQty == 0) {
             throw new Error("bien essayé, mais y'a plus de snacks");
         }
-        // vérif quantité monnaie
-        if (this.money >= 1) {
-            this.money -= Math.floor(Math.random() * (this.money + 1))
-        } else {
+        this.snacksQty -= Math.floor(Math.random() * (this.snacksQty + 1))
+
+        if (this.money == 0) {
             throw new Error("bien essayé, mais y'a plus d'argent");
         }
+        this.money -= Math.floor(Math.random() * (this.money + 1))
         this.isOn = false
     }
 }

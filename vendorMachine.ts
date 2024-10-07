@@ -9,26 +9,53 @@
 // shootWithFoot (fait tomber 5 snack et 20e. Et eteint la machine)
 
 class VendorMachine {
-    private isOn
-    private snacksQty
-    private money
+    private isOn: boolean
+    private snacksQty: number
+    private money: number
 
-    public buySnack() {
-        this.isOn = true
-        this.money += 2
-        this.snacksQty -= 1
+    public constructor() {
+        this.isOn = false
+        this.snacksQty = 50
+        this.money = 0
     }
 
-    public reset() {
+    public buySnack(): void {
+        if (this.isOn) {
+            if (this.snacksQty > 0) {
+                this.snacksQty --
+                this.money += 2
+            }
+        } else {
+            throw new Error("La machine est malheureusement éteinte :/");
+        }
+    }
+
+    public reset(): void {
         this.isOn = false
         this.money = 0
         this.snacksQty = 50
         this.isOn = true
     }
 
-    public shootWithFoot() {
-        this.snacksQty -= 5
-        this.money -= 20
+    public shootWithFoot(): void {
+        // vérif quantité snacks
+        if (this.snacksQty <= 5 && this.snacksQty > 0) {
+            this.snacksQty -= this.snacksQty
+        } else if (this.snacksQty == 0) {
+            throw new Error("bien essayé, mais y'a plus de snacks");
+        } else {
+            this.snacksQty -= 5
+        }
+        // vérif quantité monnaie
+        if (this.money <= 20 && this.money > 0) {
+            this.money -= this.money
+        } else if (this.money == 0) {
+            throw new Error("bien essayé, mais y'a plus d'argent");
+        } else {
+            this.money -= 20
+        }
         this.isOn = false
     }
 }
+
+const vendorMachine = new VendorMachine()
